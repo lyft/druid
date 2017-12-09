@@ -28,7 +28,7 @@
     <parent>
         <artifactId>druid</artifactId>
         <groupId>io.druid</groupId>
-        <version>0.11.0</version>
+        <version>0.11.0.1</version>
     </parent>
 
     <dependencies>
@@ -73,6 +73,10 @@
                                 <argument>${project.parent.version}</argument>
                                 <argument>-l</argument>
                                 <argument>${settings.localRepository}</argument>
+                                <argument>--remoteRepository</argument>
+                                <argument>http://repo.hortonworks.com/content/repositories/releases</argument>
+                                <argument>--remoteRepository</argument>
+                                <argument>http://repo.spring.io/plugins-release/</argument>
                                 <argument>-h</argument>
                                 <argument>org.apache.hadoop:hadoop-client:${hadoop.compile.version}</argument>
                                 <argument>-c</argument>
@@ -101,8 +105,8 @@
                                 <argument>io.druid.extensions:mysql-metadata-storage</argument>
                                 <argument>-c</argument>
                                 <argument>io.druid.extensions:postgresql-metadata-storage</argument>
-                                <argument>-c</argument>
-                                <argument>io.druid.extensions:druid-kerberos</argument>
+                                <!--<argument>-c</argument>-->
+                                <!--<argument>io.druid.extensions:druid-kerberos</argument>-->
                                 <argument>-c</argument>
                                 <argument>io.druid.extensions:druid-s3-extensions</argument>
                                 <argument>-c</argument>
@@ -204,6 +208,10 @@
                                         <argument>-l</argument>
                                         <argument>${settings.localRepository}</argument>
                                         <argument>--no-default-hadoop</argument>
+                                        <argument>--remoteRepository</argument>
+                                        <argument>http://repo.hortonworks.com/content/repositories/releases</argument>
+                                        <argument>--remoteRepository</argument>
+                                        <argument>http://repo.spring.io/plugins-release/</argument>
                                         <argument>-c</argument>
                                         <argument>io.druid.extensions.contrib:ambari-metrics-emitter</argument>
                                         <argument>-c</argument>
