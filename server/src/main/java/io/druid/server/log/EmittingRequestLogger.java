@@ -59,7 +59,7 @@ public class EmittingRequestLogger implements RequestLogger
            '}';
   }
 
-  private static class RequestLogEvent implements Event
+  public static class RequestLogEvent implements Event
   {
     final ImmutableMap<String, String> serviceDimensions;
     final String feed;
@@ -132,7 +132,7 @@ public class EmittingRequestLogger implements RequestLogger
     }
   }
 
-  private static class RequestLogEventBuilder extends ServiceEventBuilder<Event>
+  public static class RequestLogEventBuilder extends ServiceEventBuilder<Event>
   {
     private final String feed;
     private final RequestLogLine requestLogLine;
