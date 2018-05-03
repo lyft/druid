@@ -19,18 +19,22 @@
 
 package io.druid.emitter.statsd;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
-import com.metamx.emitter.core.Emitter;
-import com.metamx.emitter.core.Event;
-import com.metamx.emitter.service.ServiceMetricEvent;
+import com.google.common.base.Strings;
 import com.timgroup.statsd.NonBlockingStatsDClient;
 import com.timgroup.statsd.StatsDClient;
 import com.timgroup.statsd.StatsDClientErrorHandler;
+import io.druid.java.util.common.ISE;
 import io.druid.java.util.common.logger.Logger;
 
 import java.io.IOException;
+import com.metamx.emitter.core.Emitter;
+import com.metamx.emitter.core.Event;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Map;
 
 /**
@@ -39,12 +43,11 @@ public class StatsDEmitter implements Emitter
 {
 
   private final static Logger log = new Logger(StatsDEmitter.class);
-  private final static String DRUID_METRIC_SEPARATOR = "\\/";
-  private final static String STATSD_SEPARATOR = ":|\\|";
 
   private final StatsDClient statsd;
   private final StatsDEmitterConfig config;
-  private final DimensionConverter converter;
+  private final StatsDEventHandler eventHandler;
+  private final Map<String, StatsDDimension> dimensionMap;
 
   public StatsDEmitter(StatsDEmitterConfig config, ObjectMapper mapper)
   {
@@ -73,7 +76,8 @@ public class StatsDEmitter implements Emitter
   public StatsDEmitter(StatsDEmitterConfig config, ObjectMapper mapper, StatsDClient client)
   {
     this.config = config;
-    this.converter = new DimensionConverter(mapper, config.getDimensionMapPath());
+    this.dimensionMap = readMap(mapper, config.getDimensionMapPath());
+    this.eventHandler = config.getEventHandler();
     this.statsd = client;
   }
 
@@ -83,46 +87,7 @@ public class StatsDEmitter implements Emitter
   @Override
   public void emit(Event event)
   {
-    if (event instanceof ServiceMetricEvent) {
-      ServiceMetricEvent metricEvent = (ServiceMetricEvent) event;
-      String host = metricEvent.getHost();
-      String service = metricEvent.getService();
-      String metric = metricEvent.getMetric();
-      Map<String, Object> userDims = metricEvent.getUserDims();
-      Number value = metricEvent.getValue();
-
-      ImmutableList.Builder<String> nameBuilder = new ImmutableList.Builder<>();
-      if (config.getIncludeHost()) {
-        nameBuilder.add(host);
-      }
-      nameBuilder.add(service);
-      nameBuilder.add(metric);
-
-      StatsDMetric statsDMetric = converter.addFilteredUserDims(service, metric, userDims, nameBuilder);
-
-      if (statsDMetric != null) {
-
-        String fullName = Joiner.on(config.getSeparator())
-                                .join(nameBuilder.build())
-                                .replaceAll(DRUID_METRIC_SEPARATOR, config.getSeparator())
-                                .replaceAll(STATSD_SEPARATOR, config.getSeparator());
-
-        long val = statsDMetric.convertRange ? Math.round(value.doubleValue() * 100) : value.longValue();
-        switch (statsDMetric.type) {
-          case count:
-            statsd.count(fullName, val);
-            break;
-          case timer:
-            statsd.time(fullName, val);
-            break;
-          case gauge:
-            statsd.gauge(fullName, val);
-            break;
-        }
-      } else {
-        log.debug("Metric=[%s] has no StatsD type mapping", statsDMetric);
-      }
-    }
+    eventHandler.handleEvent(statsd, event, config, dimensionMap);
   }
 
   @Override
@@ -132,6 +97,26 @@ public class StatsDEmitter implements Emitter
   public void close() throws IOException
   {
     statsd.stop();
+  }
+
+  private Map<String, StatsDDimension> readMap(ObjectMapper mapper, String dimensionMapPath)
+  {
+    try {
+      InputStream is;
+      if (Strings.isNullOrEmpty(dimensionMapPath)) {
+        log.info("Using default metric dimension and types");
+        is = this.getClass().getClassLoader().getResourceAsStream("defaultMetricDimensions.json");
+      } else {
+        log.info("Using metric dimensions at types at [%s]", dimensionMapPath);
+        is = new FileInputStream(new File(dimensionMapPath));
+      }
+      return mapper.reader(new TypeReference<Map<String, StatsDDimension>>()
+      {
+      }).readValue(is);
+    }
+    catch (IOException e) {
+      throw new ISE(e, "Failed to parse metric dimensions and types");
+    }
   }
 
 }
