@@ -28,7 +28,7 @@
     <parent>
         <artifactId>druid</artifactId>
         <groupId>io.druid</groupId>
-        <version>0.11.0.2</version>
+        <version>0.11.0-lyft-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -105,6 +105,8 @@
                                 <argument>io.druid.extensions:mysql-metadata-storage</argument>
                                 <argument>-c</argument>
                                 <argument>io.druid.extensions:postgresql-metadata-storage</argument>
+                                <argument>-c</argument>
+                                <argument>io.druid.extensions:mysql-metadata-storage</argument>
                                 <!--<argument>-c</argument>-->
                                 <!--<argument>io.druid.extensions:druid-kerberos</argument>-->
                                 <argument>-c</argument>
