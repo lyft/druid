@@ -127,7 +127,7 @@ public class EmittingRequestLogger implements RequestLogger
 
   }
 
-  private static class RequestLogEventBuilder extends ServiceEventBuilder<Event>
+  public static class RequestLogEventBuilder extends ServiceEventBuilder<Event>
   {
     private final String feed;
     private final RequestLogLine requestLogLine;

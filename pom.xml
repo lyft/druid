@@ -29,7 +29,7 @@
 
     <groupId>org.apache.druid</groupId>
     <artifactId>druid</artifactId>
-    <version>0.13.0-incubating</version>
+    <version>0.13.0.0-incubating-lyft</version>
     <packaging>pom</packaging>
 
     <name>Druid</name>
@@ -124,7 +124,7 @@
         <module>extendedset</module>
         <module>hll</module>
         <!-- Core extensions -->
-        <module>extensions-core/avro-extensions</module>
+        <!--<module>extensions-core/avro-extensions</module>-->
         <module>extensions-core/datasketches</module>
         <module>extensions-core/druid-bloom-filter</module>
         <module>extensions-core/druid-kerberos</module>
@@ -175,6 +175,28 @@
             <id>${repoOrgId}</id>
             <name>${repoOrgName}</name>
             <url>${repoOrgUrl}</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <id>hortonworks.extrepo</id>
+            <name>Hortonworks HDP</name>
+            <url>http://repo.hortonworks.com/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>spring-io</id>
+            <name>Spring IO</name>
+            <url>http://repo.spring.io/plugins-release/</url>
         </repository>
     </repositories>
 
