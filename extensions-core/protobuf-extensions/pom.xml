@@ -29,7 +29,7 @@
   <parent>
     <artifactId>druid</artifactId>
     <groupId>org.apache.druid</groupId>
-    <version>0.13.0.0-incubating-lyft</version>
+    <version>0.13.0.3-incubating-lyft</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
 
