@@ -32,7 +32,7 @@
     </parent>
 
     <properties>
-        <apache.kafka.version>0.10.2.0</apache.kafka.version>
+        <apache.kafka.version>2.3.0</apache.kafka.version>
     </properties>
 
     <dependencies>
@@ -108,12 +108,12 @@
         <dependency>
             <groupId>org.apache.calcite.avatica</groupId>
             <artifactId>avatica</artifactId>
-            <version>1.10.0</version>
+            <version>1.14.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.calcite.avatica</groupId>
             <artifactId>avatica-server</artifactId>
-            <version>1.10.0</version>
+            <version>1.14.0</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
