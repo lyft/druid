@@ -94,7 +94,7 @@
         <slf4j.version>1.7.12</slf4j.version>
         <!-- If compiling with different hadoop version also modify default hadoop coordinates in TaskConfig.java -->
         <hadoop.compile.version>2.8.3</hadoop.compile.version>
-        <hive.version>2.0.0</hive.version>
+        <hive.version>2.3.4</hive.version>
         <powermock.version>1.6.6</powermock.version>
         <aws.sdk.version>1.11.199</aws.sdk.version>
         <caffeine.version>2.5.5</caffeine.version>
@@ -1389,7 +1389,7 @@
                                 <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
                                     <licenseFamilyCategory>MIT</licenseFamilyCategory>
                                     <licenseFamilyName>MIT JQuery</licenseFamilyName>
-                                    <notes></notes>
+                                    <notes/>
                                     <patterns>
                                         <pattern>Copyright 2012 jQuery Foundation and other contributors; Licensed MIT</pattern>
                                         <pattern>jQuery Foundation, Inc. | jquery.org/license</pattern>
@@ -1398,7 +1398,7 @@
                                 <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
                                     <licenseFamilyCategory>Underscore</licenseFamilyCategory>
                                     <licenseFamilyName>Underscore</licenseFamilyName>
-                                    <notes></notes>
+                                    <notes/>
                                     <patterns>
                                         <pattern>Underscore is freely distributable under the MIT license</pattern>
                                     </patterns>
@@ -1406,7 +1406,7 @@
                                 <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
                                     <licenseFamilyCategory>Allan Jardine</licenseFamilyCategory>
                                     <licenseFamilyName>Allan Jardine</licenseFamilyName>
-                                    <notes></notes>
+                                    <notes/>
                                     <patterns>
                                         <pattern>Copyright 2009 Allan Jardine. All Rights Reserved</pattern>
                                     </patterns>
@@ -1414,7 +1414,7 @@
                                 <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
                                     <licenseFamilyCategory>Allan Jardine</licenseFamilyCategory>
                                     <licenseFamilyName>Allan Jardine</licenseFamilyName>
-                                    <notes></notes>
+                                    <notes/>
                                     <patterns>
                                         <pattern>Copyright 2009 Allan Jardine. All Rights Reserved</pattern>
                                         <pattern>Copyright 2008-2011 Allan Jardine</pattern>
