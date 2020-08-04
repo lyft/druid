@@ -30,7 +30,7 @@
     <parent>
         <artifactId>druid</artifactId>
         <groupId>org.apache.druid</groupId>
-        <version>0.13.0-incubating</version>
+        <version>0.13.0.6-incubating-lyft</version>
     </parent>
 
     <dependencies>
@@ -145,6 +145,8 @@
                                         <argument>org.apache.druid.extensions:druid-protobuf-extensions</argument>
                                         <argument>-c</argument>
                                         <argument>org.apache.druid.extensions:mysql-metadata-storage</argument>
+                                        <argument>-c</argument>
+                                        <argument>org.apache.druid.extensions:druid-parquet-extensions</argument>
                                         <argument>-c</argument>
                                         <argument>org.apache.druid.extensions:postgresql-metadata-storage</argument>
                                         <argument>-c</argument>
@@ -283,8 +285,6 @@
                                         <argument>org.apache.druid.extensions.contrib:druid-opentsdb-emitter</argument>
                                         <argument>-c</argument>
                                         <argument>org.apache.druid.extensions.contrib:druid-orc-extensions</argument>
-                                        <argument>-c</argument>
-                                        <argument>org.apache.druid.extensions.contrib:druid-parquet-extensions</argument>
                                         <argument>-c</argument>
                                         <argument>org.apache.druid.extensions.contrib:druid-rabbitmq</argument>
                                         <argument>-c</argument>

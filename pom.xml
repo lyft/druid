@@ -29,7 +29,7 @@
 
     <groupId>org.apache.druid</groupId>
     <artifactId>druid</artifactId>
-    <version>0.13.0-incubating</version>
+    <version>0.13.0.6-incubating-lyft</version>
     <packaging>pom</packaging>
 
     <name>Druid</name>
@@ -135,6 +135,7 @@
         <module>extensions-core/kafka-extraction-namespace</module>
         <module>extensions-core/kafka-indexing-service</module>
         <module>extensions-core/mysql-metadata-storage</module>
+        <module>extensions-core/parquet-extensions</module>
         <module>extensions-core/postgresql-metadata-storage</module>
         <module>extensions-core/protobuf-extensions</module>
         <module>extensions-core/lookups-cached-global</module>
@@ -152,7 +153,6 @@
         <module>extensions-contrib/kafka-eight-simpleConsumer</module>
         <module>extensions-contrib/rabbitmq</module>
         <module>extensions-contrib/distinctcount</module>
-        <module>extensions-contrib/parquet-extensions</module>
         <module>extensions-contrib/statsd-emitter</module>
         <module>extensions-contrib/orc-extensions</module>
         <module>extensions-contrib/time-min-max</module>
@@ -1435,6 +1435,16 @@
                                 <exclude>docker/*.conf</exclude>
                                 <exclude>target/**</exclude>
                                 <exclude>**/test/resources/**</exclude>
+                                <exclude>**/src/test/avro/**</exclude>
+                                <exclude>**/src/test/thrift/**</exclude>
+                                <exclude>.travis.yml</exclude>
+                                <!--DEV and IT-TESTS-->
+                                <exclude>**/*.json</exclude>
+                                <exclude>**/*.parq</exclude>
+                                <exclude>**/*.parquet</exclude>
+                                <exclude>**/jvm.config</exclude>
+                                <exclude>**/quickstart/protobuf/**</exclude>
+                                <exclude>**/tutorial/conf/**</exclude>
                                 <exclude>**/derby.log</exclude>
                                 <exclude>**/jvm.config</exclude>
                                 <exclude>**/*.avsc</exclude>
